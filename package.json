@@ -8,7 +8,8 @@
     "help": "parcel help",
     "dev": "parcel index.html --open",
     "build": "yarn clean && parcel build index.html",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "fix": "eslint src/** --fix"
   },
   "repository": {
     "type": "git",

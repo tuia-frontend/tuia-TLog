@@ -10,6 +10,9 @@ module.exports = {
   globals: {
     $: true,
     alert: true,
-    HTMLElement: true
+    HTMLElement: true,
+    localStorage: true,
+    sessionStorage: true,
+    location: true
   }
 }
