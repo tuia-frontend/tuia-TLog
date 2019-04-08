@@ -79,7 +79,9 @@
     .vc-tab {
       display: inline-block;
       line-height: 39em / @font;
-      padding: 0 15em / @font;
+      width: 80em / @font;
+      text-align: center;
+      // padding: 0 15em / @font;
       border-right: 1px solid #D9D9D9;
       text-decoration: none;
       color: #000;
@@ -155,7 +157,7 @@
     }
 
     .vc-log {
-      padding-bottom: 39em / @font;
+      padding-bottom: 40em / @font;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -331,13 +333,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-      border-top: 1px solid #D9D9D9;
+      border-top: 1px solid #eee;
       display: block!important;
 
       .vc-cmd-input-wrap {
         display: block;
         height: 28em / @font;
-        margin-right: 40em / @font;
+        margin-right: 60em / @font;
         padding: 6em / @font 8em / @font;
       }
 
@@ -360,7 +362,7 @@
         top: 0;
         right: 0;
         bottom: 0;
-        width: 40em / @font;
+        width: 60em / @font;
         border: none;
         background-color: #EFEFF4;
         outline: none;
@@ -369,21 +371,26 @@
       }
       .vc-cmd-btn:active {
         background-color: rgba(0,0,0,0.15);
+        border: none;
       }
 
       .vc-cmd-prompted {
-        position: fixed;
+        position: absolute;
         width: 100%;
         background-color: #FBF9FE;
-        border: 1px solid #D9D9D9;
+        border-top: 1px solid #D9D9D9;
         overflow-x: scroll;
         display: none;
+        padding: 0;
+        margin: 0;
+        bottom: 40em / @font;
       }
+
       .vc-cmd-prompted li {
         list-style: none;
         line-height: 30px;
         padding: 0 6em / @font;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #eee;
       }
     }
 

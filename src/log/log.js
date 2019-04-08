@@ -88,7 +88,7 @@ class VConsoleLogTab extends VConsolePlugin {
       })
     }
     btnList[0].className = 'vc-actived'
-    callback(btnList)
+    // callback(btnList)
   }
 
   onAddTool(callback) {

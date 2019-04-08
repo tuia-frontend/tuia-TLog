@@ -150,7 +150,7 @@ class VConsoleDefaultTab extends VConsoleLogTab {
           const m = Math.min(200, $prompted.children.length * 31)
           $prompted.style.display = 'block'
           $prompted.style.height = m + 'px'
-          $prompted.style.marginTop = -m + 'px'
+          // $prompted.style.marginTop = -m + 'px'
         }
       } else {
         $prompted.style.display = 'none'

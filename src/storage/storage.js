@@ -174,12 +174,14 @@ class VConsoleStorageTab extends VConsolePlugin {
     if (!window.localStorage) {
       return []
     }
-
     try {
       let list = []
       for (var i = 0; i < localStorage.length; i++) {
         let name = localStorage.key(i)
         let value = localStorage.getItem(name)
+        if (name === 'vConsole_switch_x' || name === 'vConsole_switch_y') {
+          continue
+        }
         list.push({
           name: name,
           value: value

@@ -7,8 +7,19 @@ activityPlugin.on('init', () => {
 })
 
 activityPlugin.on('renderTab', callback => {
-  const html = '<div>Click the tool button below!</div>'
+  var html = '<div>Click the tool button below!</div>'
   callback(html)
+})
+
+activityPlugin.on('addTool', callback => {
+  const btnList = []
+  btnList.push({
+    name: 'Reload',
+    onClick: function(event) {
+      location.reload()
+    }
+  })
+  callback(btnList)
 })
 
 export default activityPlugin
