@@ -151,16 +151,18 @@ class VConsole {
     let $switch = $.one('.vc-switch', this.$dom)
     let switchX = tool.getStorage('switch_x') * 1
     let switchY = tool.getStorage('switch_y') * 1
+    console.log(switchX, switchY)
     if (switchX || switchY) {
       // check edge
       if (switchX + $switch.offsetWidth > document.documentElement.offsetWidth) {
         switchX = document.documentElement.offsetWidth - $switch.offsetWidth
       }
-      if (switchY + $switch.offsetHeight > document.documentElement.offsetHeight) {
-        switchY = document.documentElement.offsetHeight - $switch.offsetHeight
+      if (switchY + $switch.offsetHeight > window.screen.availHeight) {
+        switchY = window.screen.availHeight - $switch.offsetHeight
       }
       if (switchX < 0) { switchX = 0 }
       if (switchY < 0) { switchY = 0 }
+      console.log(switchX, switchY)
       this.switchPos.x = switchX
       this.switchPos.y = switchY
       $.one('.vc-switch').style.right = switchX + 'px'
@@ -289,8 +291,8 @@ class VConsole {
         if (x + $switch.offsetWidth > document.documentElement.offsetWidth) {
           x = document.documentElement.offsetWidth - $switch.offsetWidth
         }
-        if (y + $switch.offsetHeight > document.documentElement.offsetHeight) {
-          y = document.documentElement.offsetHeight - $switch.offsetHeight
+        if (y + $switch.offsetHeight > window.screen.availHeight) {
+          y = window.screen.availHeight - $switch.offsetHeight
         }
         if (x < 0) { x = 0 }
         if (y < 0) { y = 0 }
