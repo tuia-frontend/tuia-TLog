@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 /*
 Tencent is pleased to support the open source community by making vConsole available.
 
@@ -17,12 +16,16 @@ Unless required by applicable law or agreed to in writing, software distributed 
 // global
 import './lib/symbol.js'
 
-// classes
+// basics
 import VConsole from './core/core.js'
 import VConsolePlugin from './lib/plugin.js'
+
+// custom
+import activityPlugin from './custom/activity.js'
 
 // export
 VConsole.VConsolePlugin = VConsolePlugin
 window.VConsole = VConsole
 
-new VConsole()
+const vc = new VConsole()
+vc.addPlugin(activityPlugin)
