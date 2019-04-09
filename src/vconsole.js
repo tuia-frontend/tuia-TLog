@@ -29,3 +29,8 @@ window.VConsole = VConsole
 
 const vc = new VConsole()
 vc.addPlugin(activityPlugin)
+
+$.ajax({
+  type: 'post',
+  url: '/activity/getAllSkin'
+})

@@ -179,7 +179,7 @@ class VConsoleStorageTab extends VConsolePlugin {
       for (var i = 0; i < localStorage.length; i++) {
         let name = localStorage.key(i)
         let value = localStorage.getItem(name)
-        if (name === 'vConsole_switch_x' || name === 'vConsole_switch_y') {
+        if (name === 'vConsole_switch_x' || name === 'vConsole_switch_y' || name === 'vConsole_proxyUrl') {
           continue
         }
         list.push({

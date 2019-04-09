@@ -151,7 +151,6 @@ class VConsole {
     let $switch = $.one('.vc-switch', this.$dom)
     let switchX = tool.getStorage('switch_x') * 1
     let switchY = tool.getStorage('switch_y') * 1
-    console.log(switchX, switchY)
     if (switchX || switchY) {
       // check edge
       if (switchX + $switch.offsetWidth > document.documentElement.offsetWidth) {
@@ -162,7 +161,6 @@ class VConsole {
       }
       if (switchX < 0) { switchX = 0 }
       if (switchY < 0) { switchY = 0 }
-      console.log(switchX, switchY)
       this.switchPos.x = switchX
       this.switchPos.y = switchY
       $.one('.vc-switch').style.right = switchX + 'px'
@@ -485,6 +483,7 @@ class VConsole {
         let item = toolList[i]
         let $item = $.render(tplToolItem, {
           name: item.name || 'Undefined',
+          data: item.data || {},
           pluginID: plugin.id
         })
         if (item.global === true) {

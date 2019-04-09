@@ -20,12 +20,16 @@ import VConsolePlugin from '../lib/plugin.js'
 import tplTabbox from './tabbox.html'
 import tplHeader from './header.html'
 import tplItem from './item.html'
+import './network.less'
 
 class VConsoleNetworkTab extends VConsolePlugin {
   constructor(...args) {
     super(...args)
 
-    this.$tabbox = $.render(tplTabbox, {})
+    this.proxyUrl = this.getProxyUrl()
+    this.$tabbox = $.render(tplTabbox, {
+      proxyUrl: this.proxyUrl
+    })
     this.$header = null
     this.reqList = {} // URL as key, request item as value
     this.domList = {} // URL as key, dom item as value
@@ -44,11 +48,27 @@ class VConsoleNetworkTab extends VConsolePlugin {
 
   onAddTool(callback) {
     let that = this
+    const { proxyUrl } = this
     let toolList = [{
       name: 'Clear',
       global: false,
       onClick: function(e) {
         that.clearLog()
+      }
+    }, {
+      name: proxyUrl ? 'ProxyOff' : 'ProxyOn',
+      global: false,
+      data: {
+        status: proxyUrl ? 'on' : 'off'
+      },
+      onClick: function() {
+        that.proxyOnOrOff(this)
+      }
+    }, {
+      name: 'F5',
+      global: false,
+      onClick: function() {
+        location.reload()
       }
     }]
     callback(toolList)
@@ -151,6 +171,34 @@ class VConsoleNetworkTab extends VConsolePlugin {
       $logbox.parentNode.insertBefore($header, $logbox)
     }
     this.$header = $header
+  }
+
+  // 开启代理
+  proxyOnOrOff(btn) {
+    const status = btn.dataset.status
+    console.log(status)
+    if (status && status === 'on') {
+      // 开启状态 =》 关闭状态
+      btn.innerText = 'ProxyOn'
+      btn.dataset.status = 'off'
+      tool.setStorage('proxyUrl', '')
+      $.one('.vc-proxy-input').value = ''
+      this.rootUrl = ''
+    } else {
+      // 关闭状态 =》 开发状态
+      const proxyUrl = this.rootUrl || $.one('.vc-proxy-input').value || tool.getStorage('proxyUrl')
+      if (proxyUrl) {
+        tool.setStorage('proxyUrl', proxyUrl)
+        this.rootUrl = proxyUrl
+        btn.innerText = 'ProxyOff'
+        btn.dataset.status = 'on'
+      }
+    }
+  }
+
+  // 获取代理
+  getProxyUrl() {
+    return tool.getStorage('proxyUrl') || ''
   }
 
   /**
@@ -266,7 +314,6 @@ class VConsoleNetworkTab extends VConsolePlugin {
     let _send = window.XMLHttpRequest.prototype.send
     that._open = _open
     that._send = _send
-
     // mock open()
     window.XMLHttpRequest.prototype.open = function() {
       let XMLReq = this
@@ -280,7 +327,12 @@ class VConsoleNetworkTab extends VConsolePlugin {
       XMLReq._requestID = id
       XMLReq._method = method
       XMLReq._url = url
-
+      // proxy
+      const urlAnchor = document.createElement('a')
+      urlAnchor.href = url
+      if (that.proxyUrl) {
+        XMLReq._url = that.proxyUrl + urlAnchor.pathname
+      }
       // mock onreadystatechange
       let _onreadystatechange = XMLReq.onreadystatechange || function() {}
       let onreadystatechange = function() {
