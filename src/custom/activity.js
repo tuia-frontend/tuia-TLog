@@ -3,7 +3,7 @@ import $ from '../lib/query.js'
 import * as tool from '../lib/tool.js'
 import tpl from './activity.html'
 
-const showInfo = function(data) {
+const showInfo = function(data = {}) {
   const box = $.one('#vc-activity')
   box.innerHTML = ''
   const msgs = [

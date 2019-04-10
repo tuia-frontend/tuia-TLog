@@ -262,7 +262,7 @@ class VConsole {
    */
   _bindEvent() {
     let that = this
-
+    let isMove = false
     // drag & drop switch button
     let $switch = $.one('.vc-switch', that.$dom)
     $.bind($switch, 'touchstart', function(e) {
@@ -270,16 +270,20 @@ class VConsole {
       that.switchPos.startY = e.touches[0].pageY
     })
     $.bind($switch, 'touchend', function(e) {
-      that.switchPos.x = that.switchPos.endX
-      that.switchPos.y = that.switchPos.endY
-      that.switchPos.startX = 0
-      that.switchPos.startY = 0
-      that.switchPos.endX = 0
-      that.switchPos.endY = 0
-      tool.setStorage('switch_x', that.switchPos.x)
-      tool.setStorage('switch_y', that.switchPos.y)
+      if (isMove) {
+        that.switchPos.x = that.switchPos.endX
+        that.switchPos.y = that.switchPos.endY
+        that.switchPos.startX = 0
+        that.switchPos.startY = 0
+        that.switchPos.endX = 0
+        that.switchPos.endY = 0
+        tool.setStorage('switch_x', that.switchPos.x)
+        tool.setStorage('switch_y', that.switchPos.y)
+        isMove = false
+      }
     })
     $.bind($switch, 'touchmove', function(e) {
+      isMove = true
       if (e.touches.length > 0) {
         let offsetX = e.touches[0].pageX - that.switchPos.startX
         let offsetY = e.touches[0].pageY - that.switchPos.startY

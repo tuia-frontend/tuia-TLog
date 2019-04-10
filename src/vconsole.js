@@ -27,18 +27,5 @@ import activityPlugin from './custom/activity.js'
 VConsole.VConsolePlugin = VConsolePlugin
 window.VConsole = VConsole
 
-window.CFG = {
-  appId: 123,
-  slotId: 456,
-  activityId: 789,
-  skinName: 'skin',
-  consumerId: 'consumerId'
-}
-
 const vc = new VConsole()
 vc.addPlugin(activityPlugin)
-
-$.ajax({
-  type: 'post',
-  url: '/activity/getAllSkin'
-})
