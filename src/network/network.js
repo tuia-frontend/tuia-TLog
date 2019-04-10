@@ -64,12 +64,6 @@ class VConsoleNetworkTab extends VConsolePlugin {
       onClick: function() {
         that.proxyOnOrOff(this)
       }
-    }, {
-      name: 'F5',
-      global: false,
-      onClick: function() {
-        location.reload()
-      }
     }]
     callback(toolList)
   }

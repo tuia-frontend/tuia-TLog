@@ -100,6 +100,11 @@ class VConsoleLogTab extends VConsolePlugin {
         that.clearLog()
         that.vConsole.triggerEvent('clearLog')
       }
+    }, {
+      name: 'CFG',
+      onClick: function(event) {
+        console.info(window.CFG)
+      }
     }]
     callback(toolList)
   }
